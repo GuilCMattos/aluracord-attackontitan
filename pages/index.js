@@ -1,36 +1,9 @@
 import { Box, Button, Text, TextField, Image } from '@skynexui/components';
+import React from 'react';
+import {useRouter} from 'next/router';
 import appConfig from '../config.json';
 
-function GlobalStyle() {
-    return (
-        <style global jsx>{`
-        @import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Poppins:wght@200;400;600;800&display=swap');
 
-        * {
-          margin: 0;
-          padding: 0;
-          box-sizing: border-box;
-          list-style: none;
-        }
-        body {
-            font-family: 'Poppins', sans-serif;
-        }
-        /* App fit Height */ 
-        html, body, #__next {
-          min-height: 100vh;
-          display: flex;
-          flex: 1;
-        }
-        #__next {
-          flex: 1;
-        }
-        #__next > * {
-          flex: 1;
-        }
-        /* ./App fit Height */ 
-      `}</style>
-    );
-}
 
 
 // Componente React
@@ -72,11 +45,14 @@ function Title(props) {
 //   export default HomePage
 
 export default function PaginaInicial() {
-    const username = 'GuilCMattos';
+    // const username = 'GuilCMattos';
+    const [username, setUsername ] = React.useState('');
+    const root = useRouter();
+    const image = "https://i.pinimg.com/originals/31/59/9c/31599cb938c703e195281720a157b548.jpg"; 
 
     return (
         <>
-            <GlobalStyle />
+           
             <Box
                 styleSheet={{
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
@@ -97,12 +73,18 @@ export default function PaginaInicial() {
                         width: '100%', maxWidth: '700px',
                         borderRadius: '5px', padding: '32px', margin: '16px',
                         boxShadow: '0 2px 10px 0 rgb(0 0 0 / 20%)',
-                        backgroundColor: appConfig.theme.colors.neutrals["999"], // Cor do fundo do BOX
+                        backgroundColor: "rgba(0, 0, 0, 0.85)", // Cor do fundo do BOX
                     }}
                 >
                     {/* Formulário */}
                     <Box
                         as="form"
+                        onSubmit= {function (infosDoEvento) { 
+                            infosDoEvento.preventDefault();
+                            console.log('Alguém submetou o form');
+                            root.push('/chat')
+                            // window.location.href = '/chat'
+                        }}
                         styleSheet={{
                             display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
                             width: { xs: '100%', sm: '50%' }, textAlign: 'center', marginBottom: '32px',
@@ -113,7 +95,35 @@ export default function PaginaInicial() {
                             {appConfig.name}
                         </Text>
 
+                        {/* <input
+                             type="text"
+                            value ={username} 
+                            onChange= {function (event) 
+                            { console.log("usuário digitou", event.target.value);
+
+                            // Onde está o valor?
+                            const valor = event.target.value;
+                            // Trocar o valor da variável
+                            setUsername(valor);
+                        } 
+                            
+                        } 
+                      
+                            /> */}
+
                         <TextField
+                        required 
+                        placeholder="Informe seu usuário do GitHub"
+                        value ={username} 
+                        onChange= {function (event) 
+                            { 
+                            // Onde está o valor?
+                            const valor = event.target.value;
+                            // Trocar o valor da variável
+                            setUsername(valor);
+                        } 
+                            
+                        } 
                             fullWidth
                             textFieldColors={{
                                 neutral: {
@@ -160,7 +170,11 @@ export default function PaginaInicial() {
                                 borderRadius: '50%',
                                 marginBottom: '16px',
                             }}
-                            src={`https://github.com/${username}.png`}
+                            src={
+                                username.length > 2
+                                  ? `https://github.com/${username}.png`
+                                  : image
+                              }
                         />
                         <Text
                             variant="body4"
