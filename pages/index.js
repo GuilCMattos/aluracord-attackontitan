@@ -4,6 +4,8 @@ import appConfig from '../config.json';
 function GlobalStyle() {
     return (
         <style global jsx>{`
+        @import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Poppins:wght@200;400;600;800&display=swap');
+
         * {
           margin: 0;
           padding: 0;
@@ -11,7 +13,7 @@ function GlobalStyle() {
           list-style: none;
         }
         body {
-          font-family: 'Open Sans', sans-serif;
+            font-family: 'Poppins', sans-serif;
         }
         /* App fit Height */ 
         html, body, #__next {
@@ -42,9 +44,10 @@ function Title(props) {
             <Tag> {props.children} </Tag>
             <style jsx>{`
             ${Tag} {
-                color: ${appConfig.theme.colors.neutrals["000"]} ;
-                font-size: 24px;
-                font-weight: 600;
+                color: ${appConfig.theme.colors.primary["200"]} ;
+                font-size: 34px;
+                font-weight: 800;
+                font-family: 'Architects Daughter', cursive;
             }
             `}</style>
         </>
@@ -77,8 +80,8 @@ export default function PaginaInicial() {
             <Box
                 styleSheet={{
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    backgroundColor: appConfig.theme.colors.primary[500],
-                    backgroundImage: 'url(https://virtualbackgrounds.site/wp-content/uploads/2020/08/the-matrix-digital-rain.jpg)',
+                    // backgroundColor: appConfig.theme.colors.primary[500],
+                    backgroundImage: 'url(https://i.pinimg.com/originals/32/4a/51/324a511fb2d414841cf6458088aa5d35.jpg)',
                     backgroundRepeat: 'no-repeat', backgroundSize: 'cover', backgroundBlendMode: 'multiply',
                 }}
             >
@@ -94,7 +97,7 @@ export default function PaginaInicial() {
                         width: '100%', maxWidth: '700px',
                         borderRadius: '5px', padding: '32px', margin: '16px',
                         boxShadow: '0 2px 10px 0 rgb(0 0 0 / 20%)',
-                        backgroundColor: appConfig.theme.colors.neutrals[700],
+                        backgroundColor: appConfig.theme.colors.neutrals["999"], // Cor do fundo do BOX
                     }}
                 >
                     {/* Formulário */}
@@ -105,8 +108,8 @@ export default function PaginaInicial() {
                             width: { xs: '100%', sm: '50%' }, textAlign: 'center', marginBottom: '32px',
                         }}
                     >
-                        <Title tag="h2">Boas vindas de volta!</Title>
-                        <Text variant="body3" styleSheet={{ marginBottom: '32px', color: appConfig.theme.colors.neutrals[300] }}>
+                        <Title tag="h2">TATAKAE</Title>
+                        <Text variant="body3" styleSheet={{ marginBottom: '32px', color: appConfig.theme.colors.neutrals["300"] }}>
                             {appConfig.name}
                         </Text>
 
@@ -114,10 +117,10 @@ export default function PaginaInicial() {
                             fullWidth
                             textFieldColors={{
                                 neutral: {
-                                    textColor: appConfig.theme.colors.neutrals[200],
-                                    mainColor: appConfig.theme.colors.neutrals[900],
-                                    mainColorHighlight: appConfig.theme.colors.primary[500],
-                                    backgroundColor: appConfig.theme.colors.neutrals[800],
+                                    textColor: appConfig.theme.colors.neutrals["200"], // Cor dentro do box
+                                    mainColor: appConfig.theme.colors.neutrals["000"], // Cor de borda do box
+                                mainColorHighlight: appConfig.theme.colors.primary["500"],
+                                    backgroundColor: appConfig.theme.colors.neutrals["800"], // Cor do BG de dentro do BOX
                                 },
                             }}
                         />
@@ -127,9 +130,9 @@ export default function PaginaInicial() {
                             fullWidth
                             buttonColors={{
                                 contrastColor: appConfig.theme.colors.neutrals["000"],
-                                mainColor: appConfig.theme.colors.primary[500],
-                                mainColorLight: appConfig.theme.colors.primary[400],
-                                mainColorStrong: appConfig.theme.colors.primary[600],
+                                mainColor: appConfig.theme.colors.primary["500"],
+                                mainColorLight: appConfig.theme.colors.primary["400"],
+                                mainColorStrong: appConfig.theme.colors.primary["600"],
                             }}
                         />
                     </Box>
@@ -144,7 +147,7 @@ export default function PaginaInicial() {
                             alignItems: 'center',
                             maxWidth: '200px',
                             padding: '16px',
-                            backgroundColor: appConfig.theme.colors.neutrals[800],
+                            backgroundColor: appConfig.theme.colors.neutrals[900],
                             border: '1px solid',
                             borderColor: appConfig.theme.colors.neutrals[999],
                             borderRadius: '10px',
