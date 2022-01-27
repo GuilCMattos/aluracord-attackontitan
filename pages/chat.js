@@ -11,6 +11,7 @@ const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
 export default function ChatPage() {
     const [message, setMessage] = useState('')
     const [messageList, setMessageList] = useState([])
+    
 
     React.useEffect(() => { 
         supabaseClient
@@ -53,13 +54,27 @@ export default function ChatPage() {
 
     function handleDeleteMessage(event) {
         const messageId = Number(event.target.dataset.id)
-        const messageListFiltered = messageList.filter((messageFiltered) => {
-            return messageFiltered.id != messageId
-        })
+        console.log(messageId);
 
-        setMessageList(messageListFiltered)
+        supabaseClient
+            .from('message')
+            .delete()
+            .match({ id: messageId })
+            .then(({ data }) => {
+                const messageListFiltered = messageList.filter((messageFiltered) => {
+                    return messageFiltered.id != data[0].id
+                })
+
+                setMessageList(messageListFiltered)
+            })
+
+
+
     }
 
+
+
+    
     return (
         <Box
             styleSheet={{
@@ -161,6 +176,7 @@ export default function ChatPage() {
         </Box>
     )
 }
+
 
 function Header() {
     return (
