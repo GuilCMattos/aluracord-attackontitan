@@ -82,7 +82,7 @@ export default function PaginaInicial() {
                         onSubmit= {function (infosDoEvento) { 
                             infosDoEvento.preventDefault();
                             console.log('Alguém submetou o form');
-                            root.push('/chat')
+                        root.push(`/chat?username=${username}`)
                             // window.location.href = '/chat'
                         }}
                         styleSheet={{
